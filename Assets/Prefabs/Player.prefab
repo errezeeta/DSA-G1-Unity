@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f501fe757f4ff5b46a74f172c6ebba8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 0.01
+  moveTime: 0.06
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -156,9 +156,9 @@ MonoBehaviour:
   foodText: {fileID: 0}
   defText: {fileID: 0}
   dmgText: {fileID: 0}
-  food: 0
-  dmg: 0
-  def: 0
+  food: 100
+  dmg: 100
+  def: 100
 --- !u!114 &532390361
 MonoBehaviour:
   m_ObjectHideFlags: 0

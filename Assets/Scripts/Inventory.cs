@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
     private GameObject[] slot;
     public GameObject slotHolder;
     private Button button;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -48,12 +49,27 @@ public class Inventory : MonoBehaviour
         if (inventoryEnabled == true)
         {
             inventory.SetActive(true);
-            button= GameObject.Find("InventoryBtn").GetComponent<Button>();
+            
+            button = GameObject.Find("InventoryBtn").GetComponent<Button>();
             button.enabled = false;
         }
-        else
+        else if (inventoryEnabled==false)
         {
             inventory.SetActive(false);
+        }
+    }
+
+    public void TryToBlock()
+    {
+        if (inventoryEnabled == false)
+            Invoke("MakeIt1", 1);
+    }
+    public void MakeIt1()
+    {
+        if (inventoryEnabled == false)
+        {
+            player = GameObject.Find("Player").GetComponent<Player>();
+            player.able = 1;
         }
     }
     //Ante la collision con el objeto en el suelo, nos preparamos para pasarlo al inventario
@@ -100,10 +116,14 @@ public class Inventory : MonoBehaviour
         if (inventoryEnabled == true)
         {
             inventory.SetActive(true);
+            player = GameObject.Find("Player").GetComponent<Player>();
+            player.able = 0;
+
         }
         else
         {
             inventory.SetActive(false);
+            Invoke("MakeIt1", 2);
         }
     }
 }

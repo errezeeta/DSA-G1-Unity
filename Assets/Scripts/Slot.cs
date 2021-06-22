@@ -46,7 +46,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         description = ni.descripcion;
         icon = ni.icon;
         GameManager.instance.Change(typo,value,value2);
-        inventory.Close(SlotID);
+        inventory = GameObject.Find("Player").GetComponent<Inventory>();
+        inventory.Open();
     }
 
     public void OnPointerClick (PointerEventData pointerEventData)

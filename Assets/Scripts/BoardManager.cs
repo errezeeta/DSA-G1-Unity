@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic; 		//Allows us to use Lists.
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class BoardManager : MonoBehaviour
 {

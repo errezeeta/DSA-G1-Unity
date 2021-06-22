@@ -9,6 +9,7 @@ public class Bp : MonoBehaviour, IPointerClickHandler
     private Inventory player;
     private Text test;
     public int i = 0;
+    private Player play;
     // Start is called before the first frame update
     void Start()
     {

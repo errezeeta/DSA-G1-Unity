@@ -147,5 +147,5 @@ MonoBehaviour:
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
-  playerDamage: 10
+  playerDamage: 35
   dmgText: {fileID: 1482110019613512946, guid: 9d268e5a5ff047a42a212220c3a44d7f, type: 3}

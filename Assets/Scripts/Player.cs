@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MovingObject
 {
@@ -18,6 +19,7 @@ public class Player : MovingObject
     public int dmg;
     public int def;
     private Vector2 touchOrigin = -Vector2.one;
+    public int able;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -28,6 +30,7 @@ public class Player : MovingObject
         foodText.text = "NOTA: " + food;
         dmgText.text = "Attk: " + dmg;
         defText.text = "Def: " + def;
+        able = 1;
         base.Start();
     }
 
@@ -47,22 +50,27 @@ public class Player : MovingObject
         int vertical = 0;       //Used to store the vertical move direction.
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
-        horizontal = (int)(Input.GetAxisRaw("Horizontal"));
-        vertical = (int)(Input.GetAxisRaw("Vertical"));
-        if (horizontal != 0)
+        if (able=true)
         {
-            vertical = 0;
+            horizontal = (int)(Input.GetAxisRaw("Horizontal"));
+            vertical = (int)(Input.GetAxisRaw("Vertical"));
+            if (horizontal != 0)
+            {
+                vertical = 0;
+            }
         }
 #else
-        if (Input.touchCount > 0)
+        if (able == 1)
         {
-            Touch myTouch = Input.touches[0];
-            if (myTouch.phase == TouchPhase.Began)
+            if (Input.touchCount > 0)
             {
-                touchOrigin = myTouch.position;
-            }
-            else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
-            {
+                Touch myTouch = Input.touches[0];
+                if (myTouch.phase == TouchPhase.Began)
+                {
+                    touchOrigin = myTouch.position;
+                }
+                else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
+                {
                 Vector2 touchEnd = myTouch.position;
                 float x = touchEnd.x - touchOrigin.x;
                 float y = touchEnd.y - touchOrigin.y;
@@ -71,6 +79,7 @@ public class Player : MovingObject
                     horizontal = x > 0 ? 1 : -1;
                 else
                     vertical = y > 0 ? 1 : -1;
+                }
             }
         }
 #endif
@@ -119,9 +128,12 @@ public class Player : MovingObject
         hitWall.DamageWall(wallDamage);
 
     }
+
     private void Restart()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        //Load the last scene loaded, in this case Main, the only scene in the game. And we load it in "Single" mode so it replace the existing one
+        //and not load all the scene object in the current scene.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

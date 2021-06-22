@@ -61,7 +61,7 @@ MonoBehaviour:
     maximum: 2
   itemCount:
     minimum: 0
-    maximum: 2
+    maximum: 1
   exit: {fileID: 5297626990385311531, guid: 253086884a216974eaa6e45a338f187f, type: 3}
   floorTiles:
   - {fileID: 6433808168832886690, guid: 2d033efbd9df30e4b9f9ab55058f2929, type: 3}
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelStartDelay: 2
   boardScript: {fileID: 0}
+  level: 1
   turnDelay: 0.1
   playerFoodPoints: 100
   playerDmgPoints: 100

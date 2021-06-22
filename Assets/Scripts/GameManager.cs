@@ -46,17 +46,28 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void OnLevelWasLoaded (int index)
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static public void CallbackInitialization()
     {
-        level++;
-        InitGame();
-
+        //register the callback to be called everytime the scene is loaded
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    static private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        instance.level++;
+        instance.InitGame();
+    }
+
+    //private void OnLevelWasLoaded (int index)
+    //////  InitGame();
+
+    //}
 
     public void GameOver()
     {
         //Set levelText to display number of levels passed and game over message
-        levelText.text = "Després de " + level + " setamanes, has suspés!";
+        levelText.text = "Després de " + level + " setmanes, has suspés!";
 
         //Enable black background image gameObject.
         levelImage.SetActive(true);
